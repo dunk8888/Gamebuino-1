@@ -8,11 +8,11 @@
 
 //SETTINGS YOU CAN EDIT
 
-#define SCR_CONTRAST 25
+#define SCR_CONTRAST 25 //First change, my Ebay Nokia 5110 Display did not work with the default value of 60.
 #define NUM_CHANNELS 1 //number of sound channels, between 0 and 4
 #define ENABLE_GUI 1 //enable menu, keyboard, pop-up, volume adjust functions
 #define ENABLE_BITMAPS 1 //will replace bitmaps with rectangles if disabled
-#define ENABLE_BATTERY 0 //disable battery monitoring
+#define ENABLE_BATTERY 0 //disable battery monitoring; changed to 0 to prevent missing battery notification.
 #define ENABLE_BACKLIGHT 1 //disable automatic back-light
 #define TINY_FONT 1 //0 = 5x7 font ; 1 = 3x5 font7
 #define DISPLAY_ROT NOROT //set to NOROT, ROTCCW, ROT180 or ROTCW
