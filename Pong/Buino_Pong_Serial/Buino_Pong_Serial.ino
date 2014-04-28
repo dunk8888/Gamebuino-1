@@ -116,7 +116,7 @@ void loop() {
       }
     }
      
-    Serial.println(str);
+    
     str = "";
     
     //draw the score
