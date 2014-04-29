@@ -5,3 +5,5 @@ Content:
 Gamebuino library by rodot (https://github.com/Rodot/Gamebuino), edited two entries in settings.c to get it working with my homemade Gamebuino Clone.
 
 Gamebuino Pong Game with modded Controls.
+
+Gamebuino Capnam (Pacman Clone) Pre Alpha.
