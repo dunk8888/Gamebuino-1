@@ -10,7 +10,7 @@ stdscr.keypad(1)
 
 stdscr.addstr(0,0,"Hit 'q' to quit")
 stdscr.refresh()
-s = serial.Serial("/dev/ttyACM2", 115200) #port is ttyACM0 (may need to change it depending on your arduino port), and baud rate is 115200
+s = serial.Serial("/dev/ttyACM3", 115200) #port is ttyACM0 (may need to change it depending on your arduino port), and baud rate is 115200
 time.sleep(2)    #wait for the Serial to initialize
 
 an = 0
@@ -20,7 +20,9 @@ def main():
     
     stdscr.addstr(4, 50, "Up")
     stdscr.addstr(6, 50, "Down")   
-   
+    stdscr.addstr(5, 40, "Left")
+    stdscr.addstr(5, 60, "Right")
+	
     key = stdscr.getch()
     
     stdscr.refresh()
@@ -29,13 +31,17 @@ def main():
 		main()
 		
         
-       
-        
-        
     if key == curses.KEY_DOWN:
 		s.write("z")
 		main()
+	
+    if key == curses.KEY_RIGHT: 
+		s.write("r")
+		main()
 		
+    if key == curses.KEY_LEFT: 
+		s.write("l")
+		main()		
       
        
     if key == ord('q'): 
