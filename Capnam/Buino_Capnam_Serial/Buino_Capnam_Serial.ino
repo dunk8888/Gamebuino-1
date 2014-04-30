@@ -48,38 +48,29 @@ void loop() {
     str = str + c; // Makes the string readString
 
     if(str == "v"){ 
-      ball_y = ball_y - 3;
-      command = 3;
-      if(an == 1){
-        command = 7;
-      }
-
+      command = 7;
     }    
 
 
 
 
     if(str == "z"){
-      ball_y = ball_y + 3;
-      command = 4;
-      if(an == 1){
-        command = 8;
-      }
-    }
-    if(str == "l"){
-      ball_x = ball_x - 3;
-      command = 2;
-      if(an == 1){
-        command = 6;
-      }
+
+      command = 8;
 
     }
+    
+    if(str == "l"){
+
+      command = 6;
+
+
+    }
+    
     if(str == "r"){
-      ball_x = ball_x + 3;
-      command = 1;
-      if(an == 1){
-        command = 5;
-      }
+
+      command = 5;
+
     }
 
     if(ball_x < 0){
@@ -101,42 +92,51 @@ void loop() {
 
     switch(command){
     case 1:
+      ball_x = ball_x + 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmano, NOROT, NOFLIP);
-      an = 1;
+      command = 5;
       break;
     case 2:
+      ball_x = ball_x - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmano, NOROT, FLIPH);
-      an = 1;
+command = 6;
       break;
     case 3:
+      ball_y = ball_y - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmano, ROTCCW, NOFLIP);
-      an = 1;
+command = 7;
       break;
     case 4:
+      ball_y = ball_y + 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmano, ROTCW, NOFLIP);
-      an = 1;
+command = 8;
       break;
-      case 5:
+    case 5:
+      ball_x = ball_x + 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, NOROT, NOFLIP);
-      an = 0;
+command = 1;
       break;
-      case 6:
+    case 6:
+      ball_x = ball_x - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, NOROT, FLIPH);
-      an = 0;
+command = 2;
       break;
-      case 7:
+    case 7:
+      ball_y = ball_y - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, ROTCCW, NOFLIP);
-      an = 0;
+command = 3;
       break;
-      case 8:
+    case 8:
+      ball_y = ball_y + 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, ROTCW, NOFLIP);
-      an = 0;
+command = 4;
       break;
     }
     str = "";
   }
 
 }
+
 
 
 
