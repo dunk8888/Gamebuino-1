@@ -6,8 +6,6 @@ int ball_y = LCDHEIGHT/2;
 int ball_size = 8;
 int an = 0;
 String str = "";
-String rot = "NOROT";
-String flip = "FLIPH";
 int command = 0;
 static unsigned char PROGMEM pacmano[]=
 {
@@ -59,14 +57,14 @@ void loop() {
       command = 8;
 
     }
-    
+
     if(str == "l"){
 
       command = 6;
 
 
     }
-    
+
     if(str == "r"){
 
       command = 5;
@@ -99,43 +97,44 @@ void loop() {
     case 2:
       ball_x = ball_x - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmano, NOROT, FLIPH);
-command = 6;
+      command = 6;
       break;
     case 3:
       ball_y = ball_y - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmano, ROTCCW, NOFLIP);
-command = 7;
+      command = 7;
       break;
     case 4:
       ball_y = ball_y + 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmano, ROTCW, NOFLIP);
-command = 8;
+      command = 8;
       break;
     case 5:
       ball_x = ball_x + 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, NOROT, NOFLIP);
-command = 1;
+      command = 1;
       break;
     case 6:
       ball_x = ball_x - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, NOROT, FLIPH);
-command = 2;
+      command = 2;
       break;
     case 7:
       ball_y = ball_y - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, ROTCCW, NOFLIP);
-command = 3;
+      command = 3;
       break;
     case 8:
       ball_y = ball_y + 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, ROTCW, NOFLIP);
-command = 4;
+      command = 4;
       break;
     }
     str = "";
   }
 
 }
+
 
 
 
