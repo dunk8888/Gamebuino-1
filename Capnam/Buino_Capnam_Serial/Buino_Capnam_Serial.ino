@@ -3,6 +3,8 @@
 Gamebuino gb = Gamebuino();
 int ball_x = LCDWIDTH/2; //set the horizontal position to the middle of the screen
 int ball_y = LCDHEIGHT/2;
+int ghost_x = LCDWIDTH/2; //set the horizontal position to the middle of the screen
+int ghost_y = LCDHEIGHT/4;
 int ball_size = 8;
 int an = 0;
 String str = "";
@@ -32,6 +34,47 @@ static unsigned char PROGMEM pacmanc[]=
   B00011100,
   B00000000,
 };
+
+static unsigned char PROGMEM pacmanoc[]=
+{
+  8,8,
+  B00011110,
+  B00110111,
+  B01111110,
+  B01111100,
+  B01111110,
+  B00111111,
+  B00011110,
+  B00000000,
+};
+
+static unsigned char PROGMEM pacmancc[]=
+{
+  8,8,
+  B00011110,
+  B00110111,
+  B01111111,
+  B01111110,
+  B01111111,
+  B00111111,
+  B00011100,
+  B00000000,
+};
+
+static unsigned char PROGMEM ghost[]=
+{
+  8,8,
+  B00000000,
+  B00111100,
+  B01111110,
+  B11011011,
+  B11111111,
+  B11111111,
+  B11111111,
+  B10100101,
+};
+
+
 void setup() {
   gb.begin(F("caP naM"));
   gb.battery.show = false; //hide the battery indicator
@@ -88,6 +131,31 @@ void loop() {
       ball_y = LCDHEIGHT - ball_size;
     }
 
+
+    if(ball_y > ghost_y  && (ball_x == ghost_x || ball_x == ghost_x + 1 || ball_x == ghost_x - 1)){
+      ghost_y = ghost_y + 2;
+    }
+    else if(ghost_y == ball_y && ball_x == ghost_x){
+      gb.popup(F("Game Over!"), 30);
+      delay(1000);
+      setup();
+    }
+    else if(ball_y < ghost_y && (ball_x == ghost_x || ball_x == ghost_x + 1 || ball_x == ghost_x - 1)){
+      ghost_y = ghost_y - 2;
+    }
+    
+    if(ball_x > ghost_x){
+      ghost_x = ghost_x + 2;
+    }
+    else if(ghost_x == ball_x){
+      ghost_x = ghost_x;
+    }
+    else if(ball_x < ghost_x){
+      ghost_x = ghost_x - 2;
+    }
+
+    gb.display.drawBitmap(ghost_x, ghost_y, ghost, NOROT, NOFLIP);
+
     switch(command){
     case 1:
       ball_x = ball_x + 3;
@@ -134,6 +202,7 @@ void loop() {
   }
 
 }
+
 
 
 
