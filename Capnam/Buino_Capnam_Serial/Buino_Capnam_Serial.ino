@@ -79,7 +79,7 @@ void setup() {
   gb.begin(F("caP naM"));
   gb.battery.show = false; //hide the battery indicator
   Serial.begin(115200);
-
+  gb.setFrameRate(10);
 }
 
 void loop() {
