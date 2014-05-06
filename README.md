@@ -9,4 +9,4 @@ Gamebuino Pong Game with modded Controls.
 Gamebuino Capnam (Pacman Clone) Pre Alpha. (Big Update coming in the next days. Controls will be changed from Serial to real Buttons.):
 - Changing controls to normal Gamebuino Controls, once my Keypad arrives.
 - Create Maze.
-- Change Gamespeed
+- Change Gamespeed (Fixed!)
