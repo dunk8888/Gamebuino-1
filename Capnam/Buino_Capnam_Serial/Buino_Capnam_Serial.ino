@@ -74,12 +74,18 @@ static unsigned char PROGMEM ghost[]=
   B10100101,
 };
 
+//static unsigned char PROGMEM maze[]=
+//{
+//  16,1,
+//  B0000000111111110,
+//
+//};
 
 void setup() {
   gb.begin(F("caP naM"));
   gb.battery.show = false; //hide the battery indicator
   Serial.begin(115200);
-  gb.setFrameRate(10);
+  gb.setFrameRate(8);
 }
 
 void loop() {
@@ -132,7 +138,7 @@ void loop() {
     }
 
 
-    if(ball_y > ghost_y  && (ball_x == ghost_x || ball_x == ghost_x + 1 || ball_x == ghost_x - 1)){
+    if(ball_y - ghost_y > ball_x - ghost_x && (ball_y > ghost_y)){
       ghost_y = ghost_y + 2;
     }
     else if(ghost_y == ball_y && ball_x == ghost_x){
@@ -140,17 +146,17 @@ void loop() {
       delay(1000);
       setup();
     }
-    else if(ball_y < ghost_y && (ball_x == ghost_x || ball_x == ghost_x + 1 || ball_x == ghost_x - 1)){
+    else if(ball_y - ghost_y < ball_x - ghost_x && (ball_y < ghost_y)){
       ghost_y = ghost_y - 2;
     }
     
-    if(ball_x > ghost_x){
+    if(ball_x - ghost_x > ball_y - ghost_y && (ball_x > ghost_x)){
       ghost_x = ghost_x + 2;
     }
     else if(ghost_x == ball_x){
       ghost_x = ghost_x;
     }
-    else if(ball_x < ghost_x){
+    else if(ball_x - ghost_x < ball_y - ghost_y && (ball_x < ghost_x)){
       ghost_x = ghost_x - 2;
     }
 

@@ -10,7 +10,7 @@ stdscr.keypad(1)
 
 stdscr.addstr(0,0,"Hit 'q' to quit")
 stdscr.refresh()
-s = serial.Serial("/dev/ttyACM0", 115200) #port is ttyACM0 (may need to change it depending on your arduino port), and baud rate is 115200
+s = serial.Serial("/dev/ttyACM1", 115200) #port is ttyACM0 (may need to change it depending on your arduino port), and baud rate is 115200
 time.sleep(2)    #wait for the Serial to initialize
 
 an = 0
