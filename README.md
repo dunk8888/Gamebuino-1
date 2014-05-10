@@ -7,6 +7,8 @@ Gamebuino library by rodot (https://github.com/Rodot/Gamebuino), edited two entr
 Gamebuino Pong Game with modded Controls.
 
 Gamebuino Capnam (Pacman Clone) Pre Alpha. (Big Update coming in the next days. Controls will be changed from Serial to real Buttons.):
-- Changing controls to normal Gamebuino Controls, once my Keypad arrives.(Delayed)
+- Changing controls to normal Gamebuino Controls, once my Keypad arrives. (Delayed)
 - Create Maze. (Fixed)!
-- Change Gamespeed (Fixed!)
+- Change Gamespeed. (Fixed!)
+- Collision Detection.
+- Points
