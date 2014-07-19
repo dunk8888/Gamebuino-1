@@ -2,13 +2,9 @@ This repository contains all Stuff that that will occur until the Release of the
 
 Content:
 
-Gamebuino library by rodot (https://github.com/Rodot/Gamebuino), edited two entries in settings.c to get it working with my homemade Gamebuino Clone.
-
-Gamebuino Pong Game with modded Controls.
-
-Gamebuino Capnam (Pacman Clone) Pre Alpha. (Big Update coming in the next days. Controls will be changed from Serial to real Buttons.):
-- Changing controls to normal Gamebuino Controls, once my Keypad arrives. (Delayed)
+Gamebuino Pacman (Pacman Clone) Pre Alpha. 
+- Changing controls to normal Gamebuino Controls, once my Keypad arrives. (Fixed!)
 - Create Maze. (Fixed)!
 - Change Gamespeed. (Fixed!)
 - Collision Detection.
-- Points
+- Points.
