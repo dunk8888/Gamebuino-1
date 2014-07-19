@@ -7,8 +7,31 @@ int ghost_x = LCDWIDTH/2; //set the horizontal position to the middle of the scr
 int ghost_y = LCDHEIGHT/4;
 int ball_size = 8;
 int an = 0;
-String str = "";
-int command = 0;
+int command1 = 0;
+
+
+static unsigned char PROGMEM logo[] =
+{
+  64, 16,
+  B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000,
+  B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000,
+  B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000,
+  B00001111, B11100000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000,
+  B00001100, B00100000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000,
+  B00001100, B00100011, B11100011, B11100011, B11000111, B10001111, B10000111, B00010000,
+  B00001111, B11100011, B00100011, B00000011, B01101101, B10001100, B10000111, B10010000,
+  B00001100, B00000011, B00100011, B00000011, B00111001, B10001100, B10000110, B11010000,
+  B00001100, B00000011, B00100011, B00000011, B00000001, B10001100, B10000110, B01110000,
+  B00001100, B00000011, B11110011, B11100011, B00000001, B10001111, B11000110, B00110000,
+  B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000,
+  B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000,
+  B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000,
+  B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000,
+  B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000,
+  B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000, B00000000,
+};
+
+
 static unsigned char PROGMEM pacmano[]=
 {
   8,8,
@@ -35,31 +58,31 @@ static unsigned char PROGMEM pacmanc[]=
   B00000000,
 };
 
-static unsigned char PROGMEM pacmanoc[]=
-{
-  8,8,
-  B00011110,
-  B00110111,
-  B01111110,
-  B01111100,
-  B01111110,
-  B00111111,
-  B00011110,
-  B00000000,
-};
-
-static unsigned char PROGMEM pacmancc[]=
-{
-  8,8,
-  B00011110,
-  B00110111,
-  B01111111,
-  B01111110,
-  B01111111,
-  B00111111,
-  B00011100,
-  B00000000,
-};
+//static unsigned char PROGMEM pacmanoc[]=
+//{
+//  8,8,
+//  B00011110,
+//  B00110111,
+//  B01111110,
+//  B01111100,
+//  B01111110,
+//  B00111111,
+//  B00011110,
+//  B00000000,
+//};
+//
+//static unsigned char PROGMEM pacmancc[]=
+//{
+//  8,8,
+//  B00011110,
+//  B00110111,
+//  B01111111,
+//  B01111110,
+//  B01111111,
+//  B00111111,
+//  B00011100,
+//  B00000000,
+//};
 
 static unsigned char PROGMEM ghost[]=
 {
@@ -130,41 +153,40 @@ static unsigned char PROGMEM maze[]=
 };
 
 void setup() {
-  gb.begin(F("caP naM"));
+  gb.begin();
+  gb.titleScreen(F("Pacman by Sot0 (0.1)"), logo);
   gb.battery.show = false; //hide the battery indicator
-  Serial.begin(115200);
+ 
   gb.setFrameRate(8);
 }
 
 void loop() {
   if(gb.update()){
-    char c = (char)Serial.read(); // Gets one byte from serial buffer
+    
 
-    str = str + c; // Makes the string readString
-
-    if(str == "v"){ 
-      command = 7;
+    if(gb.buttons.pressed(BTN_UP)){ 
+      command1 = 7;
     }    
 
+    if(gb.buttons.pressed(BTN_C)){
+      gb.titleScreen(F("Pacman by Sot0 (0.1)"), logo);
+    }
 
 
-
-    if(str == "z"){
-
-      command = 8;
+    if(gb.buttons.pressed(BTN_DOWN)){
+      command1 = 8;
 
     }
 
-    if(str == "l"){
+    if(gb.buttons.pressed(BTN_LEFT)){
 
-      command = 6;
+      command1 = 6;
 
 
     }
+ if(gb.buttons.pressed(BTN_RIGHT)){
 
-    if(str == "r"){
-
-      command = 5;
+      command1 = 5;
 
     }
 
@@ -210,49 +232,49 @@ void loop() {
 
     gb.display.drawBitmap(ghost_x, ghost_y, ghost, NOROT, NOFLIP);
     gb.display.drawBitmap(0, 0, maze, NOROT, NOFLIP);
-    switch(command){
+    switch(command1){
     case 1:
       ball_x = ball_x + 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmano, NOROT, NOFLIP);
-      command = 5;
+      command1 = 5;
       break;
     case 2:
       ball_x = ball_x - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmano, NOROT, FLIPH);
-      command = 6;
+      command1 = 6;
       break;
     case 3:
       ball_y = ball_y - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmano, ROTCCW, NOFLIP);
-      command = 7;
+      command1 = 7;
       break;
     case 4:
       ball_y = ball_y + 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmano, ROTCW, NOFLIP);
-      command = 8;
+      command1 = 8;
       break;
     case 5:
       ball_x = ball_x + 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, NOROT, NOFLIP);
-      command = 1;
+      command1 = 1;
       break;
     case 6:
       ball_x = ball_x - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, NOROT, FLIPH);
-      command = 2;
+      command1 = 2;
       break;
     case 7:
       ball_y = ball_y - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, ROTCCW, NOFLIP);
-      command = 3;
+      command1 = 3;
       break;
     case 8:
       ball_y = ball_y + 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, ROTCW, NOFLIP);
-      command = 4;
+      command1 = 4;
       break;
     }
-    str = "";
+   
   }
 
 }
