@@ -148,31 +148,40 @@ static unsigned char PROGMEM maze[]=
   B10000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00010000,
   B10000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00010000,
   B11111111,B11111111,B11111111,B11111111,B11111111,B11111111,B11111111,B11111111,B11111111,B11111111,B11111111, //48
-  
+
 
 };
 
 void setup() {
   gb.begin();
+
   gb.titleScreen(F("Pacman by Sot0 (0.1)"), logo);
   gb.battery.show = false; //hide the battery indicator
- 
+
   gb.setFrameRate(8);
+
+
 }
 
 void loop() {
   if(gb.update()){
-    
-
-    if(gb.buttons.pressed(BTN_UP)){ 
-      command1 = 7;
-    }    
 
     if(gb.buttons.pressed(BTN_C)){
-      gb.titleScreen(F("Pacman by Sot0 (0.1)"), logo);
+      int ball_x = LCDWIDTH/2; //set the horizontal position to the middle of the screen
+      int ball_y = LCDHEIGHT/2;
+      int ghost_x = LCDWIDTH/2; //set the horizontal position to the middle of the screen
+      int ghost_y = LCDHEIGHT/4;
+      int an = 0;
+      int command1 = 0;
+      setup();
     }
 
-
+    
+    if(gb.buttons.pressed(BTN_UP)){ 
+      command1 = 7;
+    }  
+    
+    
     if(gb.buttons.pressed(BTN_DOWN)){
       command1 = 8;
 
@@ -184,7 +193,7 @@ void loop() {
 
 
     }
- if(gb.buttons.pressed(BTN_RIGHT)){
+    if(gb.buttons.pressed(BTN_RIGHT)){
 
       command1 = 5;
 
@@ -213,13 +222,12 @@ void loop() {
     }
     else if(ghost_y == ball_y + 4 && ball_x == ghost_x + 4){
       gb.popup(F("Game Over!"), 30);
-      delay(1000);
       setup();
     }
     else if(ball_y - ghost_y < ball_x - ghost_x && (ball_y < ghost_y)){
       ghost_y = ghost_y - 2;
     }
-    
+
     if(ball_x - ghost_x > ball_y - ghost_y && (ball_x > ghost_x)){
       ghost_x = ghost_x + 2;
     }
@@ -230,54 +238,63 @@ void loop() {
       ghost_x = ghost_x - 2;
     }
 
-    gb.display.drawBitmap(ghost_x, ghost_y, ghost, NOROT, NOFLIP);
+
     gb.display.drawBitmap(0, 0, maze, NOROT, NOFLIP);
     switch(command1){
     case 1:
       ball_x = ball_x + 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmano, NOROT, NOFLIP);
+      gb.display.drawBitmap(ghost_x, ghost_y, ghost, NOROT, NOFLIP);
       command1 = 5;
       break;
     case 2:
       ball_x = ball_x - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmano, NOROT, FLIPH);
+      gb.display.drawBitmap(ghost_x, ghost_y, ghost, NOROT, NOFLIP);
       command1 = 6;
       break;
     case 3:
       ball_y = ball_y - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmano, ROTCCW, NOFLIP);
+      gb.display.drawBitmap(ghost_x, ghost_y, ghost, NOROT, NOFLIP);
       command1 = 7;
       break;
     case 4:
       ball_y = ball_y + 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmano, ROTCW, NOFLIP);
+      gb.display.drawBitmap(ghost_x, ghost_y, ghost, NOROT, NOFLIP);
       command1 = 8;
       break;
     case 5:
       ball_x = ball_x + 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, NOROT, NOFLIP);
+      gb.display.drawBitmap(ghost_x, ghost_y, ghost, NOROT, NOFLIP);
       command1 = 1;
       break;
     case 6:
       ball_x = ball_x - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, NOROT, FLIPH);
+      gb.display.drawBitmap(ghost_x, ghost_y, ghost, NOROT, NOFLIP);
       command1 = 2;
       break;
     case 7:
       ball_y = ball_y - 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, ROTCCW, NOFLIP);
+      gb.display.drawBitmap(ghost_x, ghost_y, ghost, NOROT, NOFLIP);
       command1 = 3;
       break;
     case 8:
       ball_y = ball_y + 3;
       gb.display.drawBitmap(ball_x, ball_y, pacmanc, ROTCW, NOFLIP);
+      gb.display.drawBitmap(ghost_x, ghost_y, ghost, NOROT, NOFLIP);
       command1 = 4;
       break;
     }
-   
+
   }
 
 }
+
 
 
 
